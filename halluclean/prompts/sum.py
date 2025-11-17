@@ -28,3 +28,13 @@ Hallucinated Summary:{answer}
 Analysis:{analysis}
 Just output the summary, without including any additional explanation in the output.
 """
+
+# Revise
+SUM_REVISE_PROMPT = """\
+Given a document,its corresponding hallucinated summary , and an analysis explaining why the summary contains hallucinated content.
+Your task is to regenerate the summary without introducing any hallucinations.
+Document:{question}
+Hallucinated Summary:{answer}
+Analysis:{analysis}
+Just output the summary, without including any additional explanation in the output.
+"""
