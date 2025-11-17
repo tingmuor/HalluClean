@@ -10,7 +10,7 @@ High-level public API for HalluClean.
 
 每个任务提供三个接口层级：
 - detect_xxx       : 只做幻觉 / 错误检测（Plan → Reason → Judge）
-- revise_xxx       : 只做修订
+- revise_xxx       : 只做修订（可利用 detection 阶段的 analysis）
 - hallu_clean_xxx  : Pipeline = 检测 +（必要时）修订
 
 所有函数都只依赖 .model_client.run_model，便于统一管理 API key / base_url 等。
@@ -141,24 +141,34 @@ def detect_qa(
 def revise_qa(
     question: str,
     hallucinated_answer: str,
+    analysis: Optional[str] = None,
     model_name: str = "chatgpt",
     pipe=None,
     max_new_tokens: int = 512,
 ) -> Dict[str, Any]:
     """
     QA 修订。
+
+    使用 detection 阶段的 analysis（如果提供）辅助修订。
     """
     prompt = QA_REVISE_PROMPT.format(
         question=question,
         answer=hallucinated_answer,
+        analysis=analysis or "",
     )
 
-    revised = run_model(model_name, prompt, pipe=pipe, max_new_tokens=max_new_tokens)
+    revised = run_model(
+        model_name,
+        prompt,
+        pipe=pipe,
+        max_new_tokens=max_new_tokens,
+    )
 
     return {
         "task": "qa",
         "question": question,
         "original_answer": hallucinated_answer,
+        "analysis": analysis,
         "revised_answer": revised,
     }
 
@@ -199,6 +209,7 @@ def hallu_clean_qa(
     rev = revise_qa(
         question=question,
         hallucinated_answer=answer,
+        analysis=det.get("analysis"),
         model_name=revise_model,
         pipe=revise_pipe,
         max_new_tokens=max_new_tokens_revise,
@@ -282,24 +293,34 @@ def detect_sum(
 def revise_sum(
     source_text: str,
     hallucinated_summary: str,
+    analysis: Optional[str] = None,
     model_name: str = "chatgpt",
     pipe=None,
     max_new_tokens: int = 512,
 ) -> Dict[str, Any]:
     """
     摘要修订。
+
+    使用 detection 阶段的 analysis（如果提供）辅助修订。
     """
     prompt = SUM_REVISE_PROMPT.format(
         source_text=source_text,
         summary=hallucinated_summary,
+        analysis=analysis or "",
     )
 
-    revised = run_model(model_name, prompt, pipe=pipe, max_new_tokens=max_new_tokens)
+    revised = run_model(
+        model_name,
+        prompt,
+        pipe=pipe,
+        max_new_tokens=max_new_tokens,
+    )
 
     return {
         "task": "sum",
         "source_text": source_text,
         "original_summary": hallucinated_summary,
+        "analysis": analysis,
         "revised_summary": revised,
     }
 
@@ -340,6 +361,7 @@ def hallu_clean_sum(
     rev = revise_sum(
         source_text=source_text,
         hallucinated_summary=summary,
+        analysis=det.get("analysis"),
         model_name=revise_model,
         pipe=revise_pipe,
         max_new_tokens=max_new_tokens_revise,
@@ -423,24 +445,34 @@ def detect_da(
 def revise_da(
     context: str,
     hallucinated_response: str,
+    analysis: Optional[str] = None,
     model_name: str = "chatgpt",
     pipe=None,
     max_new_tokens: int = 512,
 ) -> Dict[str, Any]:
     """
     对话修订。
+
+    使用 detection 阶段的 analysis（如果提供）辅助修订。
     """
     prompt = DA_REVISE_PROMPT.format(
         context=context,
         response=hallucinated_response,
+        analysis=analysis or "",
     )
 
-    revised = run_model(model_name, prompt, pipe=pipe, max_new_tokens=max_new_tokens)
+    revised = run_model(
+        model_name,
+        prompt,
+        pipe=pipe,
+        max_new_tokens=max_new_tokens,
+    )
 
     return {
         "task": "da",
         "context": context,
         "original_response": hallucinated_response,
+        "analysis": analysis,
         "revised_response": revised,
     }
 
@@ -481,6 +513,7 @@ def hallu_clean_da(
     rev = revise_da(
         context=context,
         hallucinated_response=response,
+        analysis=det.get("analysis"),
         model_name=revise_model,
         pipe=revise_pipe,
         max_new_tokens=max_new_tokens_revise,
@@ -557,20 +590,32 @@ def detect_tsc(
 
 def revise_tsc(
     text: str,
+    analysis: Optional[str] = None,
     model_name: str = "chatgpt",
     pipe=None,
     max_new_tokens: int = 512,
 ) -> Dict[str, Any]:
     """
     自相矛盾文本修订。
-    """
-    prompt = TSC_REVISE_PROMPT.format(text=text)
 
-    revised = run_model(model_name, prompt, pipe=pipe, max_new_tokens=max_new_tokens)
+    使用 detection 阶段的 analysis（如果提供）辅助修订。
+    """
+    prompt = TSC_REVISE_PROMPT.format(
+        text=text,
+        analysis=analysis or "",
+    )
+
+    revised = run_model(
+        model_name,
+        prompt,
+        pipe=pipe,
+        max_new_tokens=max_new_tokens,
+    )
 
     return {
         "task": "tsc",
         "original_text": text,
+        "analysis": analysis,
         "revised_text": revised,
     }
 
@@ -607,6 +652,7 @@ def hallu_clean_tsc(
 
     rev = revise_tsc(
         text=text,
+        analysis=det.get("analysis"),
         model_name=revise_model,
         pipe=revise_pipe,
         max_new_tokens=max_new_tokens_revise,
@@ -689,24 +735,34 @@ def detect_mwp(
 def revise_mwp(
     problem: str,
     hallucinated_solution: str,
+    analysis: Optional[str] = None,
     model_name: str = "chatgpt",
     pipe=None,
     max_new_tokens: int = 512,
 ) -> Dict[str, Any]:
     """
     数学应用题修订。
+
+    使用 detection 阶段的 analysis（如果提供）辅助修订。
     """
     prompt = MWP_REVISE_PROMPT.format(
         problem=problem,
         solution=hallucinated_solution,
+        analysis=analysis or "",
     )
 
-    revised = run_model(model_name, prompt, pipe=pipe, max_new_tokens=max_new_tokens)
+    revised = run_model(
+        model_name,
+        prompt,
+        pipe=pipe,
+        max_new_tokens=max_new_tokens,
+    )
 
     return {
         "task": "mwp",
         "problem": problem,
         "original_solution": hallucinated_solution,
+        "analysis": analysis,
         "revised_solution": revised,
     }
 
@@ -747,6 +803,7 @@ def hallu_clean_mwp(
     rev = revise_mwp(
         problem=problem,
         hallucinated_solution=solution,
+        analysis=det.get("analysis"),
         model_name=revise_model,
         pipe=revise_pipe,
         max_new_tokens=max_new_tokens_revise,
