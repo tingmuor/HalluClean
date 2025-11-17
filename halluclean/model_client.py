@@ -8,12 +8,6 @@ Unified model interface for HalluClean.
 1. 远程模型（OpenAI / DeepSeek / 其他 OpenAI 兼容服务）
 2. 本地模型（通过 transformers 的 pipeline，由用户自行加载）
 
-- "chatgpt"     : 走 OpenAI / OPENAI_BASE_URL，默认 gpt-3.5-turbo-0125
-- "gpt4o"       : 默认 gpt-4o
-- "gpt4o-mini"  : 默认 gpt-4o-mini
-- "deepseek"    : 走 DeepSeek OpenAI 兼容接口
-- "local", "hf" : 使用本地 transformers pipeline（需要传 pipe）
-
 如需扩展其他远程模型，可以直接在本文件中加一个分支。
 """
 
