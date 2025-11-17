@@ -1,20 +1,42 @@
-# HalluClean: A Unified Framework to Combat Hallucinations in LLMs
+# HalluClean
 
-This repository provides the code and data for our AAAI 2026 paper:
+Code and data of our AAAI 2026 paper:
 
 > **HalluClean: A Unified Framework to Combat Hallucinations in LLMs**
 
-HalluClean is a lightweight, training-free framework that detects and corrects hallucinations in large language model (LLM) outputs via structured reasoning, without external knowledge or task-specific supervision.
+Extended version (with additional experiments and analyses):  
+[https://arxiv.org/pdf/2511.08916](https://arxiv.org/pdf/2511.08916)
 
-## Paper & Extended Version
+---
 
-- **AAAI 2026 conference paper** – *HalluClean: A Unified Framework to Combat Hallucinations in LLMs* (to appear).
-- **Extended version (with additional experiments and details)**: [arXiv PDF](https://arxiv.org/pdf/2511.08916)
+## ✨ Overview
 
-## Highlights
+HalluClean is a lightweight and generalizable framework for **detecting and correcting hallucinations** in large language model (LLM) outputs.
 
-- **Unified detection + revision** pipeline: plan → reason → judge → revise.
-- **Task-agnostic & zero-shot**: supports QA, dialogue, summarization, math word problems, and self-contradiction.
-- **Model-agnostic & practical**: works with both proprietary and open-source LLMs, suitable for privacy-sensitive or resource-constrained deployment.
+- **Unified framework across tasks**  
+  Question answering (QA), summarization (SUM), dialogue (DA), self-contradiction (TSC), and math word problems (MWP).
 
-<!-- You can add installation / usage sections below -->
+- **Plan → Reason → Judge detection**  
+  HalluClean decomposes hallucination detection into three structured stages:
+  1. **Plan**: understand the task and propose a checking strategy.
+  2. **Reason**: follow the plan and analyze the answer step by step.
+  3. **Judge**: make a final Yes/No decision on hallucination.
+
+- **Analysis-aware revision**  
+  The **analysis** produced in the detection stage is reused in the **revision** stage to guide a more faithful correction.
+
+- **Zero-shot and model-agnostic**  
+  No task-specific training or labeled hallucination data is required. HalluClean can run with OpenAI-style APIs or local models.
+
+- **Simple Python & CLI interfaces**  
+  A small, clean API that can be plugged into existing pipelines.
+
+---
+
+## 📦 Installation
+
+Clone this repository:
+
+```bash
+git clone https://github.com/your-name/HalluClean.git
+cd HalluClean
