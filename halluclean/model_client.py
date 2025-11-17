@@ -1,4 +1,6 @@
 """
+Unified model interface for HalluClean.
+
 这个模块对外提供一个统一的 LLM 调用入口：
     run_model(model_name, prompt, pipe=None, max_new_tokens=512, timeout=1000)
 
@@ -6,6 +8,13 @@
 1. 远程模型（OpenAI / DeepSeek / 其他 OpenAI 兼容服务）
 2. 本地模型（通过 transformers 的 pipeline，由用户自行加载）
 
+- "chatgpt"     : 走 OpenAI / OPENAI_BASE_URL，默认 gpt-3.5-turbo-0125
+- "gpt4o"       : 默认 gpt-4o
+- "gpt4o-mini"  : 默认 gpt-4o-mini
+- "deepseek"    : 走 DeepSeek OpenAI 兼容接口
+- "local", "hf" : 使用本地 transformers pipeline（需要传 pipe）
+
+如需扩展其他远程模型，可以直接在本文件中加一个分支。
 """
 
 import os
@@ -71,7 +80,6 @@ def run_model(
     max_new_tokens: int = 512,
     timeout: int = 1000,
 ) -> str:
-  
     name = model_name.lower().strip()
 
     # ---------- 远程模型：OpenAI / 兼容接口 ----------
@@ -111,8 +119,6 @@ def run_model(
             )
 
         # 通用的 text-generation 调用方式：
-        # - 输入：prompt（一个字符串）
-        # - 输出：一个列表，每个元素通常是 dict，含 "generated_text" 或 "summary_text"/"text"
         outputs = pipe(
             prompt,
             max_new_tokens=max_new_tokens,
@@ -137,4 +143,3 @@ def run_model(
         raise RuntimeError(
             "本地 pipeline 返回格式无法解析，请检查 transformers pipeline 的输出结构。"
         )
-
