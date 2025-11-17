@@ -46,52 +46,63 @@ Math Word Problems (MWP)
 >>> print(res["revised_answer"])
 """
 
-from .api import (
-    # QA
-    detect_qa,
-    revise_qa,
-    hallu_clean_qa,
-    # Summarization
-    detect_sum,
-    revise_sum,
-    hallu_clean_sum,
-    # Dialogue
-    detect_da,
-    revise_da,
-    hallu_clean_da,
-    # Self-Contradiction
-    detect_tsc,
-    revise_tsc,
-    hallu_clean_tsc,
-    # Math Word Problems
-    detect_mwp,
-    revise_mwp,
-    hallu_clean_mwp,
-)
+# halluclean/prompts/__init__.py
 
-from .model_client import run_model
+from .qa import (
+    QA_PLAN_PROMPT,
+    QA_REASON_PROMPT,
+    QA_JUDGE_PROMPT,
+    QA_REVISE_PROMPT,
+)
+from .sum import (
+    SUM_PLAN_PROMPT,
+    SUM_REASON_PROMPT,
+    SUM_JUDGE_PROMPT,
+    SUM_REVISE_PROMPT,
+)
+from .da import (
+    DA_PLAN_PROMPT,
+    DA_REASON_PROMPT,
+    DA_JUDGE_PROMPT,
+    DA_REVISE_PROMPT,
+)
+from .tsc import (
+    TSC_PLAN_PROMPT,
+    TSC_REASON_PROMPT,
+    TSC_JUDGE_PROMPT,
+    TSC_REVISE_PROMPT,
+)
+from .mwp import (
+    MWP_PLAN_PROMPT,
+    MWP_REASON_PROMPT,
+    MWP_JUDGE_PROMPT,
+    MWP_REVISE_PROMPT,
+)
 
 __all__ = [
     # QA
-    "detect_qa",
-    "revise_qa",
-    "hallu_clean_qa",
-    # Summarization
-    "detect_sum",
-    "revise_sum",
-    "hallu_clean_sum",
-    # Dialogue
-    "detect_da",
-    "revise_da",
-    "hallu_clean_da",
-    # Self-Contradiction
-    "detect_tsc",
-    "revise_tsc",
-    "hallu_clean_tsc",
-    # Math Word Problems
-    "detect_mwp",
-    "revise_mwp",
-    "hallu_clean_mwp",
-    # low-level model call
-    "run_model",
+    "QA_PLAN_PROMPT",
+    "QA_REASON_PROMPT",
+    "QA_JUDGE_PROMPT",
+    "QA_REVISE_PROMPT",
+    # SUM
+    "SUM_PLAN_PROMPT",
+    "SUM_REASON_PROMPT",
+    "SUM_JUDGE_PROMPT",
+    "SUM_REVISE_PROMPT",
+    # DA
+    "DA_PLAN_PROMPT",
+    "DA_REASON_PROMPT",
+    "DA_JUDGE_PROMPT",
+    "DA_REVISE_PROMPT",
+    # TSC
+    "TSC_PLAN_PROMPT",
+    "TSC_REASON_PROMPT",
+    "TSC_JUDGE_PROMPT",
+    "TSC_REVISE_PROMPT",
+    # MWP
+    "MWP_PLAN_PROMPT",
+    "MWP_REASON_PROMPT",
+    "MWP_JUDGE_PROMPT",
+    "MWP_REVISE_PROMPT",
 ]
