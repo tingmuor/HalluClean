@@ -1,0 +1,60 @@
+# halluclean/prompts/__init__.py
+
+from .qa import (
+    QA_PLAN_PROMPT,
+    QA_REASON_PROMPT,
+    QA_JUDGE_PROMPT,
+    QA_REVISE_PROMPT,
+)
+from .sum import (
+    SUM_PLAN_PROMPT,
+    SUM_REASON_PROMPT,
+    SUM_JUDGE_PROMPT,
+    SUM_REVISE_PROMPT,
+)
+from .da import (
+    DA_PLAN_PROMPT,
+    DA_REASON_PROMPT,
+    DA_JUDGE_PROMPT,
+    DA_REVISE_PROMPT,
+)
+from .tsc import (
+    TSC_PLAN_PROMPT,
+    TSC_REASON_PROMPT,
+    TSC_JUDGE_PROMPT,
+    TSC_REVISE_PROMPT,
+)
+from .mwp import (
+    MWP_PLAN_PROMPT,
+    MWP_REASON_PROMPT,
+    MWP_JUDGE_PROMPT,
+    MWP_REVISE_PROMPT,
+)
+
+__all__ = [
+    # QA
+    "QA_PLAN_PROMPT",
+    "QA_REASON_PROMPT",
+    "QA_JUDGE_PROMPT",
+    "QA_REVISE_PROMPT",
+    # SUM
+    "SUM_PLAN_PROMPT",
+    "SUM_REASON_PROMPT",
+    "SUM_JUDGE_PROMPT",
+    "SUM_REVISE_PROMPT",
+    # DA
+    "DA_PLAN_PROMPT",
+    "DA_REASON_PROMPT",
+    "DA_JUDGE_PROMPT",
+    "DA_REVISE_PROMPT",
+    # TSC
+    "TSC_PLAN_PROMPT",
+    "TSC_REASON_PROMPT",
+    "TSC_JUDGE_PROMPT",
+    "TSC_REVISE_PROMPT",
+    # MWP
+    "MWP_PLAN_PROMPT",
+    "MWP_REASON_PROMPT",
+    "MWP_JUDGE_PROMPT",
+    "MWP_REVISE_PROMPT",
+]
