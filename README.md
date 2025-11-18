@@ -40,19 +40,22 @@ Clone this repository:
 ```bash
 git clone https://github.com/your-name/HalluClean.git
 cd HalluClean
-
+```
 Install dependencies:
+```bash
 pip install openai
 pip install transformers
+```
 
 API configuration:
+```bash
 export OPENAI_API_KEY="YOUR_API_KEY"
 # If you are using a proxy endpoint (e.g., gptsapi):
 # export OPENAI_BASE_URL="https://api.gptsapi.net/v1"
-
+```
 ## 🧪 Quick Test (Python API)
 From the repository root (where halluclean/ lives), open Python:
-```
+```bash
 python
 
 from halluclean import hallu_clean_qa
