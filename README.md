@@ -86,8 +86,11 @@ We also provide a simple CLI in halluclean/cli.py.
 
 General usage:
 --mode detect: only run detection (Plan → Reason → Judge).
+
 --mode revise: only run revision (expects hallucinated inputs).
+
 --mode pipeline: detection + (if needed) revision.
+
 This is the default recommended mode.
 
 ```bash
