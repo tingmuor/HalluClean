@@ -40,3 +40,41 @@ Clone this repository:
 ```bash
 git clone https://github.com/your-name/HalluClean.git
 cd HalluClean
+
+Install dependencies:
+pip install openai
+pip install transformers
+
+API configuration:
+export OPENAI_API_KEY="YOUR_API_KEY"
+# If you are using a proxy endpoint (e.g., gptsapi):
+# export OPENAI_BASE_URL="https://api.gptsapi.net/v1"
+
+## 🧪 Quick Test (Python API)
+From the repository root (where halluclean/ lives), open Python:
+```
+python
+
+from halluclean import hallu_clean_qa
+
+question = "Which conference accepted the HalluClean paper?"
+answer = "It was accepted by ICML 2019."  # intentionally wrong
+
+res = hallu_clean_qa(
+    question=question,
+    answer=answer,
+    detect_model="chatgpt",
+)
+
+print("=== PLAN ===")
+print(res["detection"]["plan"])
+print("\n=== ANALYSIS ===")
+print(res["detection"]["analysis"])
+print("\n=== RAW JUDGEMENT ===")
+print(res["detection"]["raw_judgement"])
+print("\n=== IS HALLUCINATED ===")
+print(res["detection"]["is_hallucinated"])
+print("\n=== REVISED ANSWER ===")
+print(res["revised_answer"])
+```
+
