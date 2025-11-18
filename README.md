@@ -81,3 +81,22 @@ print("\n=== REVISED ANSWER ===")
 print(res["revised_answer"])
 ```
 
+## 🖥 Command-line Interface (CLI)
+We also provide a simple CLI in halluclean/cli.py.
+
+General usage:
+--mode detect: only run detection (Plan → Reason → Judge).
+--mode revise: only run revision (expects hallucinated inputs).
+--mode pipeline: detection + (if needed) revision.
+This is the default recommended mode.
+
+```bash
+python -m halluclean.cli \
+  --task {qa,sum,da,tsc,mwp} \
+  --mode {detect,revise,pipeline} \
+  --input path/to/input.jsonl \
+  --output path/to/output.jsonl \
+  --detect-model chatgpt \
+  [--revise-model chatgpt]
+```
+
