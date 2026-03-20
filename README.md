@@ -1,4 +1,4 @@
-<img width="2760" height="1574" alt="image" src="https://github.com/user-attachments/assets/916469bc-7413-4ffd-8c7b-a4052eae59e8" /># HalluClean
+# 🧹 **HalluClean**
 
 This repository contains the code for our AAAI 2026 paper "**HalluClean: A Unified Framework to Combat Hallucinations in LLMs**"
 
