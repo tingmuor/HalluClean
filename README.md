@@ -1,11 +1,10 @@
-# HalluClean
+<img width="2760" height="1574" alt="image" src="https://github.com/user-attachments/assets/916469bc-7413-4ffd-8c7b-a4052eae59e8" /># HalluClean
 
-Code and data of our AAAI 2026 paper:
-
-> **HalluClean: A Unified Framework to Combat Hallucinations in LLMs**
+This repository contains the code for our AAAI 2026 paper "**HalluClean: A Unified Framework to Combat Hallucinations in LLMs**"
 
 Extended version (with additional experiments and analyses):  
 [https://arxiv.org/pdf/2511.08916](https://arxiv.org/pdf/2511.08916)
+<img width="2760" height="1574" alt="image" src="https://github.com/user-attachments/assets/a7a7809b-19a7-4c85-8efc-85ba4c3acbf4" />
 
 ---
 
@@ -103,4 +102,13 @@ python -m halluclean.cli \
   --detect-model chatgpt \
   [--revise-model chatgpt]
 ```
+
+## 📖 Citation
+
+If you find this repository or our paper useful in your research, please consider citing:
+
+```bibtex
+@article{Zhao_Zhang_2026, title={HalluClean: A Unified Framework to Combat Hallucinations in LLMs}, volume={40}, url={https://ojs.aaai.org/index.php/AAAI/article/view/40926}, DOI={10.1609/aaai.v40i42.40926}, abstractNote={Large language models (LLMs) have achieved impressive performance across a wide range of natural language processing tasks, yet they often produce hallucinated content that undermines factual reliability. To address this challenge, we introduce HalluClean, a lightweight and task-agnostic framework for detecting and correcting hallucinations in LLM-generated text. HalluClean adopts a reasoning-enhanced paradigm, explicitly decomposing the process into planning, execution, and revision stages to identify and refine unsupported claims. It employs minimal task-routing prompts to enable zero-shot generalization across diverse domains, without relying on external knowledge sources or supervised detectors. We conduct extensive evaluations on five representative tasks—question answering, dialogue, summarization, math word problems, and contradiction detection. Experimental results show that HalluClean significantly improves factual consistency and outperforms competitive baselines, demonstrating its potential to enhance the trustworthiness of LLM outputs in real-world applications.}, number={42}, journal={Proceedings of the AAAI Conference on Artificial Intelligence}, author={Zhao, Yaxin and Zhang, Yu}, year={2026}, month={Mar.}, pages={36092-36100} }
+
+
 
